@@ -1,0 +1,28 @@
+1000,protect,,abd-global
+1000,protect,,abd-wordpress
+
+# Main AbD Global Account
+1100,protect,,abd-global/account-global/dynamodb/terraform
+1100,protect,,abd-global/account-global/cloudtrail
+1100,protect,,abd-global/account-global/s3/access-log
+1100,protect,,abd-global/account-global/s3/lambda
+2000,protect,,abd-global/services-vpc
+
+# AbD Wordpress Account
+1100,protect,,abd-wordpress/account-global/cloudtrail
+1100,protect,,abd-wordpress/account-global/s3/access-log
+1100,protect,,abd-wordpress/account-global/s3/lambda
+2000,protect,,abd-wordpress/wordpress-vpc
+2500,protect,,abd-wordpress/wordpress-vpc/vpc-peering
+3000,protect,,abd-wordpress/wordpress-vpc/database
+3000,protect,,abd-wordpress/wordpress-vpc/storage/efs
+3000,protect,,abd-wordpress/wordpress-vpc/storage/s3
+4000,protect,,abd-wordpress/wordpress-vpc/application
+4000,protect,prevent,abd-wordpress/wordpress-vpc/app-ecs
+5000,protect,,abd-wordpress/wordpress-vpc/hosted-sites/amyegillin.uk
+5000,protect,,abd-wordpress/wordpress-vpc/hosted-sites/analysisbydesign.co.uk
+5000,protect,,abd-wordpress/wordpress-vpc/hosted-sites/baltihot.co.uk
+5000,protect,,abd-wordpress/wordpress-vpc/hosted-sites/blacklit.uk
+5000,protect,,abd-wordpress/wordpress-vpc/hosted-sites/daverix.uk
+5000,protect,,abd-wordpress/wordpress-vpc/hosted-sites/oranjj.uk
+5000,protect,,abd-wordpress/wordpress-vpc/hosted-sites/rixinteriors.co.uk
