@@ -17,4 +17,4 @@ common_tag_component = "lambda"
 s3_name = "global-abd-lambda"
 
 # The policy template file
-policy_file = "lambda.json.tpl"
+policy_file = "lambda.tpl.json"

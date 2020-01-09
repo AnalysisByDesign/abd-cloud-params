@@ -25,7 +25,7 @@ asg_max_size = 2
 # --------------------------------------------------------------------------------------------
 
 # This path returns a blank page, so we don't hit the DB, or anything
-alb_health_check_path = "/wp-content/"
+alb_health_check_path = "/license.txt"
 
 # --------------------------------------------------------------------------------------------
 # Which AMI image do we want to find the latest release of
