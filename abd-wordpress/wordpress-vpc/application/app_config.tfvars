@@ -16,11 +16,13 @@ common_tag_component = "app"
 
 name = "ec2-asg"
 
+asg_ec2_instance_type = "t3.small"
+
 asg_min_size = 1
 
-asg_desired_capacity = 1
+asg_desired_capacity = 2
 
-asg_max_size = 2
+asg_max_size = 4
 
 # --------------------------------------------------------------------------------------------
 
