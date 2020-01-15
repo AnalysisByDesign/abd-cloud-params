@@ -1,7 +1,7 @@
 #!/bin/bash
 
 build_resources="compute/ec2-asg"
-statefile_basename="${vpc_name}/compute/ec2-asg"
+statefile_basename="${vpc_name}/app.wordpress/ec2-asg"
 
 # Specify the location of the public SSH key part to upload here
 # so that we can use relative file paths.
