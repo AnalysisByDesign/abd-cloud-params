@@ -45,16 +45,45 @@ mx_records = [
 # Extra DNS Records
 dns_extra = [
   {
-    type = "TXT"
-    name = ""
-    ttl  = "86400"
-
-    value = "atlassian-domain-verification=DNrS9qBTZd125yihU1EFjH9dNzRXGuW6eWl9dVMa-OY9o3+wvD/SJSY+GoIJWV6+###google-site-verification=dUfZO0WMMfTm60pmvziDQvA2JPFya8X1B2q1JzSW1Cs"
+    type  = "TXT"
+    name  = ""
+    ttl   = "3600"
+    value = "atlassian-domain-verification=DNrS9qBTZd125yihU1EFjH9dNzRXGuW6eWl9dVMa-OY9o3+wvD/SJSY+GoIJWV6+###google-site-verification=dUfZO0WMMfTm60pmvziDQvA2JPFya8X1B2q1JzSW1Cs###MS=ms95219763"
   },
   {
     type  = "CNAME"
     name  = "1a690a73cdaa4a9b68c5b261695e464f"
-    ttl   = "86400"
-    value = "verify.bing.com"
+    ttl   = "3600"
+    value = "verify.bing.com."
+  },
+  {
+    type  = "CNAME"
+    name  = "autodiscover"
+    ttl   = "3600"
+    value = "autodiscover.outlook.com."
+  },
+  {
+    type  = "CNAME"
+    name  = "sip"
+    ttl   = "3600"
+    value = "sipdir.online.lync.com."
+  },
+  {
+    type  = "CNAME"
+    name  = "lyncdiscover"
+    ttl   = "3600"
+    value = "webdir.online.lync.com."
+  },
+  {
+    type  = "SRV"
+    name  = "_sip._tls"
+    ttl   = "3600"
+    value = "100 1 443 sipdir.online.lync.com."
+  },
+  {
+    type  = "SRV"
+    name  = "_sipfederationtls._tcp"
+    ttl   = "3600"
+    value = "100 1 5061 sipfed.online.lync.com."
   },
 ]
