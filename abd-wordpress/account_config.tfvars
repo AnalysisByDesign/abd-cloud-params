@@ -54,3 +54,12 @@ mx_records = [
 docker_repository_required = true
 
 docker_repository_name = "abd-wordpress"
+
+# --------------------------------------------------------------------------------------------
+# GitHub Actions OIDC
+# Leave github_org empty in this account — the OIDC role lives only in abd-global.
+# GitHub Actions assumes the management account role which then chains to this account's
+# existing terraform role via the Terraform AWS provider assume_role configuration.
+# --------------------------------------------------------------------------------------------
+
+github_org = ""

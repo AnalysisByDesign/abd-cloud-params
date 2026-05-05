@@ -52,3 +52,12 @@ mx_records = [
 # --------------------------------------------------------------------------------------------
 
 docker_repository_required = true
+
+# --------------------------------------------------------------------------------------------
+# GitHub Actions OIDC
+# Set github_org to create the OIDC provider and role in this (management) account.
+# Run this account template manually first to bootstrap the role, then use GitHub Actions.
+# --------------------------------------------------------------------------------------------
+
+github_org               = "AnalysisByDesign"
+github_actions_role_name = "github-actions-terraform"
