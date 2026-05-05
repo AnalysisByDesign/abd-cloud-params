@@ -1,0 +1,73 @@
+name: Lint Parameters
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint-tfvars:
+    name: Lint tfvars syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with: { terraform_version: "~1.9" }
+
+      - name: Validate tfvars files can be parsed
+        run: |
+          ERROR=0
+          # Use terraform console to validate tfvars syntax by loading them
+          # A malformed tfvars causes a non-zero exit from terraform fmt
+          while IFS= read -r -d '' file; do
+            if ! terraform fmt -check "$file" > /dev/null 2>&1; then
+              echo "FAIL: $file has formatting issues"
+              terraform fmt -diff "$file"
+              ERROR=1
+            fi
+          done < <(find . -name "*.tfvars" -not -path "*/.terraform/*" -print0)
+          exit $ERROR
+
+  lint-shell:
+    name: Lint shell config scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install shellcheck
+        run: sudo apt-get install -y shellcheck
+
+      - name: Shellcheck *_config.sh files
+        run: |
+          ERROR=0
+          while IFS= read -r -d '' file; do
+            if ! shellcheck --severity=warning "$file"; then
+              ERROR=1
+            fi
+          done < <(find . -name "*_config.sh" -print0)
+          exit $ERROR
+
+  validate-sequence:
+    name: Validate prod.csv sequence
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check sequence file references valid paths
+        run: |
+          ERROR=0
+          while IFS=',' read -r _priority _protect _prevent resource; do
+            # Skip comments and empty lines
+            [[ "$resource" =~ ^[[:space:]]*$ ]] && continue
+            [[ "$resource" =~ ^# ]] && continue
+            resource=$(echo "$resource" | tr -d '[:space:]')
+            [ -z "$resource" ] && continue
+            if [ ! -d "$resource" ]; then
+              echo "MISSING: $resource (referenced in sequence/prod.csv)"
+              ERROR=1
+            fi
+          done < sequence/prod.csv
+          exit $ERROR
