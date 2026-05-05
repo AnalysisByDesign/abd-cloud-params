@@ -17,8 +17,11 @@
       "Bash(git cherry-pick *)",
       "Bash(git reset *)",
       "Bash(git restore *)",
-      "Bash(git -C * status --short)",
-      "Bash(git -C * log --oneline *)"
+      "Bash(git -C /Users/dave/Documents/Projects/abd-cloud/abd-cloud-params status --short)",
+      "Bash(git -C /Users/dave/Documents/Projects/abd-cloud/abd-cloud-params add README.md .pre-commit-config.yaml)",
+      "Bash(git -C /Users/dave/Documents/Projects/abd-cloud/abd-cloud-params commit -m ' *)",
+      "Bash(git -C /Users/dave/Documents/Projects/abd-cloud/abd-cloud-params log --oneline -2)",
+      "Bash(python3 -)"
     ]
   }
 }
