@@ -8,7 +8,6 @@
 # common_tag_component = "unknown"     - AWS resource such as vpc, storage, database, web, app
 # common_tag_environment = "unknown"   - dev, preprod, production
 
-common_tag_component = "storage"
 common_tag_component = "training"
 
 # --------------------------------------------------------------------------------------------

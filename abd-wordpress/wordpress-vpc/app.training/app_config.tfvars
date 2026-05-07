@@ -15,7 +15,7 @@ common_tag_subsystem = "training"
 # PHP delivery scaling group configuration parameters
 # --------------------------------------------------------------------------------------------
 
-name = "app.training"
+name = "app-training"
 
 asg_ec2_instance_type = "t3.nano"
 
