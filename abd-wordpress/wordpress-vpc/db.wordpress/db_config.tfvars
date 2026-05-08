@@ -11,11 +11,15 @@
 common_tag_component = "database"
 
 # --------------------------------------------------------------------------------------------
-# RDS Aurora specific configuration parameters
+# RDS MySQL specific configuration parameters
 # --------------------------------------------------------------------------------------------
+
+name = "mysql"
 
 admin_password = "ThisIsThePassword"
 
 skip_final_snapshot = false
+
+final_snapshot_identifier = "final"
 
 backup_retention = 7
