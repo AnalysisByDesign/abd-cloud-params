@@ -1,27 +1,20 @@
 {
   "permissions": {
     "allow": [
+      "Bash(git -C * add *)",
+      "Bash(git -C * commit -m ' *)",
+      "Bash(git -C * log --oneline -2)",
+      "Bash(git -C * status --short)",
       "Bash(git checkout *)",
-      "Bash(sed -n '8,15p' /Users/dave/Documents/Projects/abd-cloud/abd-cloud-modules/security/security-group/main.tf)",
-      "Bash(sed -n '82,90p' /Users/dave/Documents/Projects/abd-cloud/abd-cloud-modules/database/param-group/main.tf)",
-      "Bash(sed -n '57,64p' /Users/dave/Documents/Projects/abd-cloud/abd-cloud-modules/database/cluster-param-group/main.tf)",
-      "Bash(sed -n '10,16p' /Users/dave/Documents/Projects/abd-cloud/abd-cloud-modules/network/db-subnet-group/main.tf)",
-      "Bash(sed -n '8,13p' /Users/dave/Documents/Projects/abd-cloud/abd-cloud-modules/monitoring/cloudwatch/group/main.tf)",
-      "Bash(sed -i '' 's/map\\(\"Name\", format\\(\"%s\", var\\\\.name\\)\\)/{ Name = var.name }/g' compute/alb/main.tf compute/nlb/main.tf compute/elb/main.tf compute/ecs/cluster/main.tf compute/ec2/main.tf integrate/queue/main.tf storage/efs/main.tf storage/aws-s3/main.tf)",
-      "Bash(sed -i '' 's/map\\(\"Name\", format\\(\"%s\", var\\\\.domain_name\\)\\)/{ Name = var.domain_name }/g' security/ssl-certs/main.tf)",
-      "Bash(grep -rn '\\\\[\"${var\\\\.' /Users/dave/Documents/Projects/abd-cloud/abd-cloud-modules/ --include=\"*.tf\")",
-      "Bash(grep -rn '\"\\\\${var\\\\.' /Users/dave/Documents/Projects/abd-cloud/abd-cloud-modules/ --include=\"*.tf\")",
-      "Bash(grep -rn '\\\\[\"\\\\${var\\\\.' /Users/dave/Documents/Projects/abd-cloud/abd-cloud-modules/ --include=\"*.tf\")",
-      "Bash(grep -rn '= \"\\\\${var\\\\.[a-z_]*}\"' /Users/dave/Documents/Projects/abd-cloud/abd-cloud-modules/ --include=\"*.tf\")",
-      "Bash(xargs ls *)",
       "Bash(git cherry-pick *)",
       "Bash(git reset *)",
       "Bash(git restore *)",
-      "Bash(git -C /Users/dave/Documents/Projects/abd-cloud/abd-cloud-params status --short)",
-      "Bash(git -C /Users/dave/Documents/Projects/abd-cloud/abd-cloud-params add README.md .pre-commit-config.yaml)",
-      "Bash(git -C /Users/dave/Documents/Projects/abd-cloud/abd-cloud-params commit -m ' *)",
-      "Bash(git -C /Users/dave/Documents/Projects/abd-cloud/abd-cloud-params log --oneline -2)",
-      "Bash(python3 -)"
+      "Bash(grep -rn *)",
+      "Bash(python3 -)",
+      "Bash(sed -i '' 's/map\\(\"Name\", format\\(\"%s\", var\\\\.domain_name\\)\\)/{ Name = var.domain_name }/g' security/ssl-certs/main.tf)",
+      "Bash(sed -i '' 's/map\\(\"Name\", format\\(\"%s\", var\\\\.name\\)\\)/{ Name = var.name }/g' compute/alb/main.tf compute/nlb/main.tf compute/elb/main.tf compute/ecs/cluster/main.tf compute/ec2/main.tf integrate/queue/main.tf storage/efs/main.tf storage/aws-s3/main.tf)",
+      "Bash(sed -n *)",
+      "Bash(xargs ls *)"
     ]
   }
 }

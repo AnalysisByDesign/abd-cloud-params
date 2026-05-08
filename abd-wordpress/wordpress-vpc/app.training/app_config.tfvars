@@ -15,7 +15,7 @@ common_tag_subsystem = "training"
 # PHP delivery scaling group configuration parameters
 # --------------------------------------------------------------------------------------------
 
-name = "app.training"
+name = "app-training"
 
 asg_ec2_instance_type = "t3.nano"
 
@@ -32,12 +32,12 @@ alb_health_check_path = "/"
 
 # --------------------------------------------------------------------------------------------
 # Which AMI image do we want to find the latest release of
-#asg_ami_image_glob = "amzn2-ami-hvm-2.0*x86_64-gp2"
-#asg_ami_image_owner = "amazon"
+# TODO: custom abd-edx-* AMI no longer exists in account 800653036500 - switch back when rebuilt
+asg_ami_image_glob = "amzn2-ami-hvm-2.0*x86_64-gp2"
+asg_ami_image_owner = "amazon"
 
-asg_ami_image_glob = "abd-edx-*"
-
-asg_ami_image_owner = "800653036500"
+#asg_ami_image_glob = "abd-edx-*"
+#asg_ami_image_owner = "800653036500"
 
 asg_iam_profile_name = "app.edx"
 
