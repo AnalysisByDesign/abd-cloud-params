@@ -33,7 +33,7 @@ alb_health_check_path = "/"
 # --------------------------------------------------------------------------------------------
 # Which AMI image do we want to find the latest release of
 # TODO: custom abd-edx-* AMI no longer exists in account 800653036500 - switch back when rebuilt
-asg_ami_image_glob  = "amzn2-ami-hvm-2.0*x86_64-gp2"
+asg_ami_image_glob = "amzn2-ami-hvm-2.0*x86_64-gp2"
 asg_ami_image_owner = "amazon"
 
 #asg_ami_image_glob = "abd-edx-*"
