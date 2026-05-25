@@ -23,3 +23,14 @@ skip_final_snapshot = false
 final_snapshot_identifier = "final"
 
 backup_retention = 7
+
+# Updated to reflect actual state (engine upgraded out of band from 5.7.26 -> 8.4.7)
+engine_version = "8.4.7"
+
+storage_type = "gp3"
+
+param_group_name = "rds-manual-8-4"
+
+monitoring_interval = "0"
+
+cloudwatch_logging = []

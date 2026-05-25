@@ -1,0 +1,3 @@
+# Variables set in _config.sh files are consumed by the parent script after
+# sourcing — they are not unused. Disable SC2034 globally for this repo.
+disable=SC2034

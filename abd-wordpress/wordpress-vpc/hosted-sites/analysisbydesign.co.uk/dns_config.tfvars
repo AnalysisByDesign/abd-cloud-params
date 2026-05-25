@@ -48,7 +48,7 @@ dns_extra = [
     type  = "TXT"
     name  = ""
     ttl   = "3600"
-    value = "atlassian-domain-verification=DNrS9qBTZd125yihU1EFjH9dNzRXGuW6eWl9dVMa-OY9o3+wvD/SJSY+GoIJWV6+###google-site-verification=dUfZO0WMMfTm60pmvziDQvA2JPFya8X1B2q1JzSW1Cs###MS=ms95219763"
+    value = "atlassian-domain-verification=DNrS9qBTZd125yihU1EFjH9dNzRXGuW6eWl9dVMa-OY9o3+wvD/SJSY+GoIJWV6+###google-site-verification=dUfZO0WMMfTm60pmvziDQvA2JPFya8X1B2q1JzSW1Cs###MS=ms95219763###v=spf1 include:_spf-eu.ionos.com include:_spf.google.com ~all"
   },
   {
     type  = "CNAME"

@@ -48,7 +48,7 @@ dns_extra = [
     type  = "TXT"
     name  = ""
     ttl   = "86400"
-    value = "google-site-verification=wX1uDOdVCLuPBz_5PLVr0mDdceb0YYO5Nm4xRqb-MCw###v=spf1 include:servers.mcsv.net ?all"
+    value = "google-site-verification=wX1uDOdVCLuPBz_5PLVr0mDdceb0YYO5Nm4xRqb-MCw###v=spf1 include:_spf-eu.ionos.com include:_spf.google.com ~all"
   },
   {
     type  = "CNAME"
