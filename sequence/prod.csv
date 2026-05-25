@@ -14,10 +14,12 @@
 1100,protect,,abd-wordpress/account-global/s3/lambda
 2000,protect,,abd-wordpress/wordpress-vpc
 2500,protect,,abd-wordpress/wordpress-vpc/vpc-peering
-3000,protect,,abd-wordpress/wordpress-vpc/database
+3000,protect,,abd-wordpress/wordpress-vpc/db.wordpress
 3000,protect,,abd-wordpress/wordpress-vpc/storage/efs
-3000,protect,,abd-wordpress/wordpress-vpc/storage/s3
-4000,protect,,abd-wordpress/wordpress-vpc/application
+3000,protect,,abd-wordpress/wordpress-vpc/storage/s3.wordpress
+3000,protect,,abd-wordpress/wordpress-vpc/storage/s3.training
+4000,protect,,abd-wordpress/wordpress-vpc/app.wordpress
+4000,protect,,abd-wordpress/wordpress-vpc/app.training
 4000,protect,prevent,abd-wordpress/wordpress-vpc/app-ecs
 5000,protect,,abd-wordpress/wordpress-vpc/hosted-sites/amyegillin.uk
 5000,protect,,abd-wordpress/wordpress-vpc/hosted-sites/analysisbydesign.co.uk
