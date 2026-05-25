@@ -18,7 +18,11 @@
       "Bash(git pull *)",
       "Bash(git revert *)",
       "Bash(git push *)",
-      "Bash(gh pr *)"
+      "Bash(gh pr *)",
+      "Bash(terraform fmt *)",
+      "Bash(echo \"Exit code: $?\")",
+      "Bash(xargs -0 terraform fmt -check)",
+      "Bash(brew install *)"
     ]
   }
 }
