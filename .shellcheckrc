@@ -1,3 +1,6 @@
 # Variables set in _config.sh files are consumed by the parent script after
 # sourcing — they are not unused. Disable SC2034 globally for this repo.
 disable=SC2034
+# Variables like vpc_name and theDTS are injected by the parent script before
+# sourcing these config files — they are not assigned within the sourced script.
+disable=SC2154
