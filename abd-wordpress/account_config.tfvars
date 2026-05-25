@@ -14,6 +14,8 @@ common_tag_project = "abd"
 
 common_tag_subsystem = "wordpress"
 
+common_tag_environment = "wordpress"
+
 # --------------------------------------------------------------------------------------------
 # Account specific configuration
 # --------------------------------------------------------------------------------------------
