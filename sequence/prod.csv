@@ -2,7 +2,7 @@
 1000,protect,,abd-wordpress
 
 # Main AbD Global Account
-1100,protect,,abd-global/account-global/dynamodb/terraform
+1100,protect,,abd-global/account-global/dynamodb
 1100,protect,,abd-global/account-global/cloudtrail
 1100,protect,,abd-global/account-global/s3/access-log
 1100,protect,,abd-global/account-global/s3/lambda
