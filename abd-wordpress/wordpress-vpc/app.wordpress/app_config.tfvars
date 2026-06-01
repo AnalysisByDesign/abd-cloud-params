@@ -16,7 +16,7 @@ common_tag_component = "app"
 
 name = "ec2-asg"
 
-asg_ec2_instance_type = "t3.micro"
+asg_ec2_instance_type = "t4g.small"
 
 asg_min_size = 1
 
