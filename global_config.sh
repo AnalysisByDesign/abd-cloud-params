@@ -7,6 +7,9 @@
 build_resources=""
 statefile_basename="global"
 
+# Management account - where Terraform state and management resources live
+acct_management="813984516777"
+
 # Authentication account - source of user console logins
 acct_auth="813984516777"
 

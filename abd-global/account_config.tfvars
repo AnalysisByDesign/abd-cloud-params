@@ -63,3 +63,4 @@ docker_repository_required = true
 
 github_org               = "AnalysisByDesign"
 github_actions_role_name = "github-actions-terraform"
+github_repos             = ["abd-cloud"]
