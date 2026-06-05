@@ -16,10 +16,12 @@ common_tag_component = "cloudtrail"
 
 cloudtrail_name = "abd-wordpress-cloudtrail"
 
-cloudtrail_hub = true
+cloudtrail_hub = false
 
 # --------------------------------------------------------------------------------------------
 # S3 specific configuration parameters
 # --------------------------------------------------------------------------------------------
 
-s3_name = "abd-wordpress-cloudtrail"
+s3_name = "global-abd-cloudtrail"
+
+cloudtrail_kms_key_arn = "arn:aws:kms:eu-west-1:813984516777:key/ee390d0d-3c6e-47a3-8d0e-61402785e425"

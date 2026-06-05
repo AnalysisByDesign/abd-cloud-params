@@ -23,3 +23,5 @@ cloudtrail_hub = true
 # --------------------------------------------------------------------------------------------
 
 s3_name = "global-abd-cloudtrail"
+
+cloudtrail_allowed_accounts = ["800653036500"]
