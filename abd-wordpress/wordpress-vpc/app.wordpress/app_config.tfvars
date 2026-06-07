@@ -34,8 +34,7 @@ alb_health_check_path = "/license.txt"
 #asg_ami_image_glob = "amzn2-ami-hvm-2.0*x86_64-gp2"
 #asg_ami_image_owner = "amazon"
 
-asg_ami_image_glob = "abd-wp-php83-*"
-
+asg_ami_image_glob  = "abd-wp-php83-*"
 asg_ami_image_owner = "813984516777"
 
 asg_iam_profile_name = "ec2-asg"
