@@ -15,3 +15,18 @@ common_tag_component = "storage"
 # --------------------------------------------------------------------------------------------
 
 s3_name = "abd-wordpress-html"
+
+s3_lifecycle_rule = [
+  {
+    id      = "expire-archives-365-days"
+    enabled = true
+    filter = {
+      prefix = "archive/"
+    }
+    expiration = [
+      {
+        days = 365
+      }
+    ]
+  }
+]
