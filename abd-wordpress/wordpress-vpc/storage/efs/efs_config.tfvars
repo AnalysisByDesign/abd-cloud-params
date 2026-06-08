@@ -11,3 +11,8 @@
 common_tag_component = "storage"
 
 name = "html"
+
+throughput_mode = "elastic"
+
+# lifecycle_policy_transition_to_ia                    = "AFTER_30_DAYS"
+# lifecycle_policy_transition_to_primary_storage_class = "AFTER_1_ACCESS"

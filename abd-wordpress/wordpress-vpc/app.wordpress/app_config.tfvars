@@ -44,7 +44,8 @@ user_data_script = "cloud-init.sh"
 # --------------------------------------------------------------------------------------------
 # S3 content bucket
 
-s3_name = "abd-wordpress-html"
+s3_name        = "abd-wordpress-html"
+s3_kms_key_arn = "arn:aws:kms:eu-west-1:800653036500:key/bb72ad25-373e-4793-bd39-792d01a448ad"
 
 # --------------------------------------------------------------------------------------------
 # SSH Connectivity
