@@ -24,6 +24,9 @@ asg_desired_capacity = 1
 
 asg_max_size = 4
 
+asg_enable_instance_refresh   = true
+asg_instance_refresh_triggers = ["tag"]
+
 # --------------------------------------------------------------------------------------------
 
 # This path returns a blank page, so we don't hit the DB, or anything
