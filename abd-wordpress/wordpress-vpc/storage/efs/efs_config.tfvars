@@ -12,7 +12,11 @@ common_tag_component = "storage"
 
 name = "html"
 
-throughput_mode = "elastic"
+throughput_mode = "bursting"
 
+# Get the data back into regular storage
+lifecycle_policy_transition_to_primary_storage_class = "AFTER_1_ACCESS"
+
+# DO NOT ENABLE THIS, SMALL FILES END UP WITH A MIN OF 128Kb BLOCKS
+# AND IT COSTS MORE TO RETRIVE THE DATA SHOULD IT BE NEEDED!
 # lifecycle_policy_transition_to_ia                    = "AFTER_30_DAYS"
-# lifecycle_policy_transition_to_primary_storage_class = "AFTER_1_ACCESS"
