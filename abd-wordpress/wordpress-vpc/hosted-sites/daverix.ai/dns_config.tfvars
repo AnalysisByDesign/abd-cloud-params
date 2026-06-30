@@ -49,6 +49,6 @@ dns_extra = [
     type  = "TXT"
     name  = ""
     ttl   = "86400"
-    value = "v=spf1 include:_spf-eu.ionos.com include:_spf.google.com ~all"
+    value = "google-site-verification=ZM_kM_JRh3yzSUzS1kWecfUJaDdntP3WIQXZgLDsGv0###v=spf1 include:_spf-eu.ionos.com include:_spf.google.com ~all"
   },
 ]
