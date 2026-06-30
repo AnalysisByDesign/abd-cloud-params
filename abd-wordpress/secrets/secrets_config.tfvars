@@ -18,6 +18,8 @@ common_tag_environment = "wordpress"
 
 
 secrets = {
+
+  # Wordpress configuration files
   "abd-wordpress/db.wordpress/admin" = {
     description = "WordPress application RDS credentials"
     type        = "SecureString"
@@ -78,4 +80,17 @@ secrets = {
     type        = "SecureString"
     value       = "change_me"
   }
+
+  # Now for the Laravel configuration files
+  "laravel/mortgage.daverix.ai/env" = {
+    description = "Laravel configuration file for mortgage.daverix.ai"
+    type        = "SecureString"
+    value       = "change_me"
+  }
+  "laravel/mortgage.daverix.ai/deploy-key" = {
+    description = "Github deploy key for mortgage.daverix.ai"
+    type        = "SecureString"
+    value       = "change_me"
+  }
+
 }
