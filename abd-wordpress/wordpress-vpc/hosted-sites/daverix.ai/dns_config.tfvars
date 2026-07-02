@@ -22,7 +22,7 @@ ssl_cert_enabled = true
 # Our new target website domain
 public_apex_domain = "daverix.ai"
 
-subject_alternative_names = ["www.daverix.ai"]
+subject_alternative_names = ["*.daverix.ai"]
 
 public_sub_domain = ""
 
@@ -50,5 +50,11 @@ dns_extra = [
     name  = ""
     ttl   = "86400"
     value = "google-site-verification=ZM_kM_JRh3yzSUzS1kWecfUJaDdntP3WIQXZgLDsGv0###v=spf1 include:_spf-eu.ionos.com include:_spf.google.com ~all"
+  },
+  {
+    type  = "CNAME"
+    name  = "*"
+    ttl   = "60"
+    value = "daverix.ai"
   },
 ]
