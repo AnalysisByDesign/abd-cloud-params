@@ -16,4 +16,5 @@ common_tag_component = "github-deploy"
 
 github_repo        = "AnalysisByDesign/property-calculator"
 deploy_role_name   = "github-deploy-property-calculator"
+instance_tag_key   = "SubSystem"
 instance_tag_value = "wordpress"
