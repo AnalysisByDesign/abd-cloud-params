@@ -17,8 +17,7 @@ common_tag_component = "dns"
 # Need to ensure this is false, as we might have inherited another value
 delegation_enabled = false
 
-# False until nameservers have been delegated at the registrar and DNS validation can succeed
-ssl_cert_enabled = false
+ssl_cert_enabled = true
 
 # Our new target website domain
 public_apex_domain = "tulox.uk"
