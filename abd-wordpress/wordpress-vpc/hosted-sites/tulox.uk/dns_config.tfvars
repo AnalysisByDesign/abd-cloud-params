@@ -35,3 +35,49 @@ wp_sub_domain = "tuloxuk"
 
 # The main Wordpress load balancer
 wp_lb_name = "ec2-asg"
+
+# Email records
+# mx_records = [
+#   "10 mx00.1and1.co.uk",
+#   "20 mx01.1and1.co.uk",
+# ]
+
+# Extra DNS Records
+dns_extra = [
+  {
+    type  = "CNAME"
+    name  = "7vxo56zjvrtu3onqvzzokpf2zdzdn3ty._domainkey.tulox.uk"
+    ttl   = "86400"
+    value = "7vxo56zjvrtu3onqvzzokpf2zdzdn3ty.dkim.amazonses.com"
+  },
+  {
+    type  = "CNAME"
+    name  = "xvimguolh73jccze7svjzw3ixl6mit7p._domainkey.tulox.uk"
+    ttl   = "86400"
+    value = "xvimguolh73jccze7svjzw3ixl6mit7p.dkim.amazonses.com"
+  },
+  {
+    type  = "CNAME"
+    name  = "bxjziskfythgugjh5k5veeignofqzgbi._domainkey.tulox.uk"
+    ttl   = "86400"
+    value = "bxjziskfythgugjh5k5veeignofqzgbi.dkim.amazonses.com"
+  },
+  {
+    type  = "MX"
+    name  = "m.tulox.uk"
+    ttl   = "86400"
+    value = "10 feedback-smtp.eu-west-1.amazonses.com"
+  },
+  {
+    type  = "TXT"
+    name  = "m.tulox.uk"
+    ttl   = "86400"
+    value = "v=spf1 include:amazonses.com ~all"
+  },
+  {
+    type  = "TXT"
+    name  = "_dmarc.tulox.uk"
+    ttl   = "86400"
+    value = "v=DMARC1; p=none;"
+  },
+]
