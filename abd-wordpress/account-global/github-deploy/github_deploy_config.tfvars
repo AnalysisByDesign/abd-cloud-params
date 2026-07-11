@@ -11,10 +11,19 @@
 common_tag_component = "github-deploy"
 
 # --------------------------------------------------------------------------------------------
-# GitHub Actions deploy role for property-calculator
+# GitHub Actions deploy roles - one per application repository
 # --------------------------------------------------------------------------------------------
 
-github_repo        = "AnalysisByDesign/property-calculator"
-deploy_role_name   = "github-deploy-property-calculator"
+deploy_roles = {
+  property-calculator = {
+    github_repo = "AnalysisByDesign/property-calculator"
+    role_name   = "github-deploy-property-calculator"
+  }
+  tulox = {
+    github_repo = "AnalysisByDesign/tulox"
+    role_name   = "github-deploy-tulox"
+  }
+}
+
 instance_tag_key   = "SubSystem"
 instance_tag_value = "wordpress"
