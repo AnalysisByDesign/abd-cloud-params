@@ -81,7 +81,7 @@ secrets = {
     value       = "change_me"
   }
 
-  # Now for the Laravel configuration files
+  # Mortgage Calculator configuration files
   "laravel/mortgage.daverix.ai/env" = {
     description = "Laravel configuration file for mortgage.daverix.ai"
     type        = "SecureString"
@@ -89,6 +89,19 @@ secrets = {
   }
   "laravel/mortgage.daverix.ai/deploy-key" = {
     description = "Github deploy key for mortgage.daverix.ai"
+    type        = "SecureString"
+    value       = "change_me"
+  }
+
+
+  # Tulox configuration files
+  "laravel/tulox.uk/env" = {
+    description = "Laravel configuration file for tulox.uk"
+    type        = "SecureString"
+    value       = "change_me"
+  }
+  "laravel/tulox.uk/deploy-key" = {
+    description = "Github deploy key for tulox.uk"
     type        = "SecureString"
     value       = "change_me"
   }
