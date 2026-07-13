@@ -53,6 +53,14 @@ ssm_kms_key_arn        = "arn:aws:kms:eu-west-1:800653036500:alias/aws/ssm"
 ssm_extra_key_prefixes = ["laravel"]
 
 # --------------------------------------------------------------------------------------------
+# SES (Tulox transactional mail - ops:test-email / no-reply@tulox.uk)
+
+ses_identity_arns = [
+  "arn:aws:ses:eu-west-1:800653036500:identity/no-reply@tulox.uk",
+  "arn:aws:ses:eu-west-1:800653036500:identity/tulox.uk",
+]
+
+# --------------------------------------------------------------------------------------------
 # SSH Connectivity
 
 asg_ssh_key_name = "ec2-asg"
