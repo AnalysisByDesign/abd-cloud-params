@@ -22,7 +22,9 @@ ssl_cert_enabled = true
 # Our new target website domain
 public_apex_domain = "tulox.uk"
 
-subject_alternative_names = ["www.tulox.uk"]
+subject_alternative_names = ["www.tulox.uk", "*.tulox.uk"]
+
+wildcard_dns_enabled = true
 
 public_sub_domain = ""
 
