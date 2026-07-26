@@ -29,9 +29,8 @@ public_sub_domain = ""
 delegate_set_name = "analysisbydesign"
 
 # The Wordpress subdomain equivalent
-trg_apex_domain = "abd-wp.uk"
-
-trg_sub_domain = "analysisbydesigncouk"
+wp_apex_domain = "abd-wp.uk"
+wp_sub_domain  = "analysisbydesigncouk"
 
 # The main Wordpress load balancer
 trg_lb_name = "ec2-asg"

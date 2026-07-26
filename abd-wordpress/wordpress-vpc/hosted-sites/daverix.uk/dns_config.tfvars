@@ -29,9 +29,8 @@ public_sub_domain = ""
 delegate_set_name = "daverix"
 
 # The Wordpress subdomain equivalent
-trg_apex_domain = "abd-wp.uk"
-
-trg_sub_domain = "daverixuk"
+wp_apex_domain = "abd-wp.uk"
+wp_sub_domain  = "daverixuk"
 
 # The main Wordpress load balancer
 trg_lb_name = "ec2-asg"

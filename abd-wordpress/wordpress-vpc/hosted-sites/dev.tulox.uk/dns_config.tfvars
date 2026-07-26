@@ -18,6 +18,10 @@ ssl_cert_enabled = false
 public_apex_domain = "tulox.uk"
 public_sub_domain  = "dev"
 
+# The main load balancer
+enable_wordpress = false
+trg_lb_name      = "ec2-asg"
+
 wildcard_dns_enabled = true
 
 delegate_set_name = "devtuloxuk"
