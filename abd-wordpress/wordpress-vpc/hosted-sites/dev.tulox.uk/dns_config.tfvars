@@ -20,8 +20,24 @@ public_sub_domain  = "dev"
 
 # The main load balancer
 enable_wordpress = false
-trg_lb_name      = "ec2-asg"
+# trg_lb_name      = "ec2-asg"
 
-wildcard_dns_enabled = true
+wildcard_dns_enabled = false
+enable_www_redirect  = false
 
 delegate_set_name = "devtuloxuk"
+
+dns_extra = [
+  {
+    type  = "A"
+    name  = ""
+    ttl   = "86400"
+    value = "192.168.0.123"
+  },
+  {
+    type  = "A"
+    name  = "*"
+    ttl   = "86400"
+    value = "192.168.0.123"
+  },
+]

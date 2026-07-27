@@ -31,8 +31,9 @@ public_sub_domain = ""
 delegate_set_name = "tuloxuk"
 
 # The Wordpress subdomain equivalent
-wp_apex_domain = "abd-wp.uk"
-wp_sub_domain  = "tuloxuk"
+enable_wordpress = false
+# wp_apex_domain = "abd-wp.uk"
+# wp_sub_domain  = "tuloxuk"
 
 # The main Wordpress load balancer
 trg_lb_name = "ec2-asg"
