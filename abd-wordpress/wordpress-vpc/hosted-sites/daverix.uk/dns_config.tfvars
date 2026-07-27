@@ -30,11 +30,10 @@ delegate_set_name = "daverix"
 
 # The Wordpress subdomain equivalent
 wp_apex_domain = "abd-wp.uk"
-
-wp_sub_domain = "daverixuk"
+wp_sub_domain  = "daverixuk"
 
 # The main Wordpress load balancer
-wp_lb_name = "ec2-asg"
+trg_lb_name = "ec2-asg"
 
 # Email records
 mx_records = [

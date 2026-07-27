@@ -30,11 +30,10 @@ delegate_set_name = "baltihot"
 
 # The Wordpress subdomain equivalent
 wp_apex_domain = "abd-wp.uk"
-
-wp_sub_domain = "baltihotcouk"
+wp_sub_domain  = "baltihotcouk"
 
 # The main Wordpress load balancer
-wp_lb_name = "ec2-asg"
+trg_lb_name = "ec2-asg"
 
 # Email records
 mx_records = [
