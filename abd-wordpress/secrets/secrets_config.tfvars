@@ -105,5 +105,10 @@ secrets = {
     type        = "SecureString"
     value       = "change_me"
   }
+  "laravel/tulox.uk/user-credentials-master-secret" = {
+    description = "Master key for securing user credentials for tulox.uk"
+    type        = "SecureString"
+    value       = "change_me"
+  }
 
 }
