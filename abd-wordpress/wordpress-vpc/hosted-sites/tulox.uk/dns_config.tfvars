@@ -80,6 +80,48 @@ dns_extra = [
     type  = "TXT"
     name  = "_dmarc.tulox.uk"
     ttl   = "86400"
-    value = "v=DMARC1; p=none;"
+    value = "v=DMARC1; p=quarantine; pct=100; adkim=r; aspf=r; rua=mailto:hello@tulox.uk"
+  },
+  {
+    type  = "CNAME"
+    name  = "7vxo56zjvrtu3onqvzzokpf2zdzdn3ty._domainkey"
+    ttl   = "86400"
+    value = "7vxo56zjvrtu3onqvzzokpf2zdzdn3ty.dkim.amazonses.com"
+  },
+  {
+    type  = "CNAME"
+    name  = "_0f882feac8c66af0760987aa5e27aad9"
+    ttl   = "60"
+    value = "_f48f0f065de948679a73ce62fdc32341.jkddzztszm.acm-validations.aws."
+  },
+  {
+    type  = "CNAME"
+    name  = "_4fb7cc659df50190c538169a54be41ca.www"
+    ttl   = "60"
+    value = "_57cc9fd691aefcf91b9ae77813c5735f.jkddzztszm.acm-validations.aws."
+  },
+  {
+    type  = "CNAME"
+    name  = "s1-ionos._domainkey"
+    ttl   = "300"
+    value = "s1.dkim.ionos.com"
+  },
+  {
+    type  = "CNAME"
+    name  = "s2-ionos._domainkey"
+    ttl   = "3600"
+    value = "s2.dkim.ionos.com"
+  },
+  {
+    type  = "CNAME"
+    name  = "s42582890._domainkey"
+    ttl   = "3600"
+    value = "s42582890.dkim.ionos.com"
+  },
+  {
+    type  = "TXT"
+    name  = ""
+    ttl   = "300"
+    value = "google-site-verification=LAtIxGKjj7R4XWiH7pTfU7uTOqUf-hkF_CgMa2cPnhs###v=spf1 include:_spf-eu.ionos.com ~all"
   },
 ]
