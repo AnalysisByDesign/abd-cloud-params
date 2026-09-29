@@ -76,6 +76,60 @@ priority,protect,prevent,resource_path
 3. Add a `resource_config.tfvars` with module inputs
 4. Add an entry to `sequence/prod.csv` at the appropriate priority
 
+## Adding a Developer DNS Zone
+
+Each Tulox developer has a zone `<initials>.tulox.uk`, delegated from `tulox.uk` and pointing at their machine's Tailscale address, plus an IAM user for Caddy's ACME DNS-01 challenge. `hosted-sites/dr.tulox.uk` is the reference copy.
+
+1. Copy the reference directory, leaving its Terraform cache behind:
+
+   ```bash
+   cd abd-wordpress/wordpress-vpc/hosted-sites
+   mkdir xx.tulox.uk
+   cp dr.tulox.uk/dns_config.sh dr.tulox.uk/dns_config.tfvars xx.tulox.uk/
+   ```
+
+   Do not copy `.terraform/` - it holds the state key of the zone it was copied from.
+
+2. In `xx.tulox.uk/dns_config.sh` change the state key:
+
+   ```bash
+   statefile_basename="${vpc_name}/public-zones/xx.tulox.uk"
+   ```
+
+3. In `xx.tulox.uk/dns_config.tfvars` change:
+
+   | Setting | Value |
+   | --- | --- |
+   | `public_sub_domain` | `"xx"` |
+   | `delegate_set_name` | `"xxtuloxuk"` |
+   | `dns_extra` | both `value` entries to the Tailscale IPv4 address |
+   | `dns_challenge_user_name` | `"tulox-caddy-dns-xx"` |
+
+4. Add the directory to `sequence/prod.csv` at priority 5000.
+
+5. From the `abd-cloud` directory, plan, review, then apply:
+
+   ```bash
+   aws-vault exec abd_global -- ./tf-run.sh ../abd-cloud-params/abd-wordpress/wordpress-vpc/hosted-sites/xx.tulox.uk plan
+   aws-vault exec abd_global -- ./tf-run.sh ../abd-cloud-params/abd-wordpress/wordpress-vpc/hosted-sites/xx.tulox.uk apply
+   ```
+
+6. Create the access key by hand and paste it into that machine's local Laravel `.env`. It is never created by Terraform, as the secret would land in state:
+
+   ```bash
+   aws iam create-access-key --user-name tulox-caddy-dns-xx
+   ```
+
+7. Verify from any machine:
+
+   ```bash
+   dig +short NS xx.tulox.uk        # four awsdns name servers
+   dig +short xx.tulox.uk           # the Tailscale address
+   dig +short anything.xx.tulox.uk  # the Tailscale address
+   ```
+
+`dev.tulox.uk` and its hand-created IAM user belong to a different machine and are not managed by this process.
+
 ## Pre-commit
 
 ```bash
