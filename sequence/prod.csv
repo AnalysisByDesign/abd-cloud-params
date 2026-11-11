@@ -11,6 +11,8 @@
 1100,protect,,abd-wordpress/account-global/cloudtrail
 1100,protect,,abd-wordpress/account-global/s3/access-log
 1100,protect,,abd-wordpress/account-global/s3/lambda
+1200,protect,,abd-wordpress/account-global/github-deploy
+1200,protect,,abd-wordpress/account-global/container-registry
 2000,protect,,abd-wordpress/wordpress-vpc
 2100,protect,,abd-wordpress/wordpress-vpc/nat-instance
 2500,protect,,abd-wordpress/wordpress-vpc/vpc-peering
