@@ -12,6 +12,7 @@
 1100,protect,,abd-wordpress/account-global/s3/access-log
 1100,protect,,abd-wordpress/account-global/s3/lambda
 2000,protect,,abd-wordpress/wordpress-vpc
+2100,protect,,abd-wordpress/wordpress-vpc/nat-instance
 2500,protect,,abd-wordpress/wordpress-vpc/vpc-peering
 3000,protect,,abd-wordpress/wordpress-vpc/db.wordpress
 3000,protect,,abd-wordpress/wordpress-vpc/storage/efs
