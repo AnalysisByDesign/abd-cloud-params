@@ -53,7 +53,9 @@ mx_records = [
 # Docker Repository
 # --------------------------------------------------------------------------------------------
 
-docker_repository_required = true
+# Retired 2026-11-11 (WP-02 ruling 12): unused since 2019; repositories now come from
+# account-global/container-registry
+docker_repository_required = false
 
 # --------------------------------------------------------------------------------------------
 # GitHub Actions OIDC
