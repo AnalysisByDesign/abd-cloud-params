@@ -1,0 +1,40 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DescribeForRouteFlip",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeRouteTables",
+        "ec2:DescribeInstances"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DisableSourceDestCheckOnNatInstances",
+      "Effect": "Allow",
+      "Action": "ec2:ModifyInstanceAttribute",
+      "Resource": "arn:aws:ec2:${region}:${account_id}:instance/*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:ResourceTag/aws:autoscaling:groupName": "${asg_name}"
+        }
+      }
+    },
+    {
+      "Sid": "FlipManagedDefaultRoutes",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:ReplaceRoute",
+        "ec2:CreateRoute"
+      ],
+      "Resource": ${route_table_arns}
+    },
+    {
+      "Sid": "CompleteOwnLifecycleAction",
+      "Effect": "Allow",
+      "Action": "autoscaling:CompleteLifecycleAction",
+      "Resource": "arn:aws:autoscaling:${region}:${account_id}:autoScalingGroup:*:autoScalingGroupName/${asg_name}"
+    }
+  ]
+}
