@@ -31,6 +31,11 @@ asg_instance_refresh_min_healthy_percentage = 100
 asg_instance_refresh_max_healthy_percentage = 110
 asg_instance_refresh_instance_warmup        = 60
 
+# Weekly refresh drill: proves the route flip still works on a fresh instance (same AMI;
+# a newer fck-nat AMI only arrives when this target is next applied).
+# A weekday, so a failure is picked up in working hours rather than over a weekend.
+asg_scheduled_refresh_expression = "cron(0 4 ? * TUE *)"
+
 # fck-nat publishes public AMIs; arm64 suits the t4g family
 asg_ami_image_glob  = "fck-nat-al2023-*-arm64-ebs"
 asg_ami_image_owner = "568608671756"
