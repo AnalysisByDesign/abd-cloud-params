@@ -38,5 +38,8 @@ ecr_push_roles = {
     github_repo         = "AnalysisByDesign/abd-cloud-containers"
     role_name           = "github-ecr-push-abd-cloud-containers"
     repository_prefixes = ["abd"]
+
+    # This repository uses GitHub's immutable OIDC subject (owner and repository IDs)
+    github_subject_prefix = "repo:AnalysisByDesign@4380764/abd-cloud-containers@1452488510"
   }
 }
