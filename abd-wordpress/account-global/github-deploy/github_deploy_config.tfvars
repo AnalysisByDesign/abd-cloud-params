@@ -27,3 +27,16 @@ deploy_roles = {
 
 instance_tag_key   = "SubSystem"
 instance_tag_value = "wordpress"
+
+# --------------------------------------------------------------------------------------------
+# GitHub Actions ECR push roles - one per image-building repository (WP-02)
+# Each may push only to its own namespaces (repository/<prefix>/*), from main only.
+# --------------------------------------------------------------------------------------------
+
+ecr_push_roles = {
+  abd-cloud-containers = {
+    github_repo         = "AnalysisByDesign/abd-cloud-containers"
+    role_name           = "github-ecr-push-abd-cloud-containers"
+    repository_prefixes = ["abd"]
+  }
+}
