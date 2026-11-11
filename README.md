@@ -30,7 +30,7 @@ global_config.sh / global_config.tfvars     Platform-wide defaults (tags, region
         │   ├── efs/                      Shared WordPress media storage
         │   └── s3/                       Application S3 buckets
         ├── application/                  EC2 ASG WordPress application tier
-        ├── app-ecs/                      ECS Fargate (prevented — future use)
+        ├── app.ecs/                      ECS Fargate (prevented — future use)
         └── hosted-sites/                 Per-domain DNS, SSL, and ALB configuration
             ├── analysisbydesign.co.uk/
             ├── abd.training/

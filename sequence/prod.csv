@@ -20,7 +20,7 @@
 3000,protect,,abd-wordpress/wordpress-vpc/storage/s3.training
 4000,protect,,abd-wordpress/wordpress-vpc/app.wordpress
 4000,protect,prevent,abd-wordpress/wordpress-vpc/app.training
-4000,protect,prevent,abd-wordpress/wordpress-vpc/app-ecs
+4000,protect,prevent,abd-wordpress/wordpress-vpc/app.ecs
 5000,protect,,abd-wordpress/wordpress-vpc/hosted-sites/amyegillin.uk
 5000,protect,,abd-wordpress/wordpress-vpc/hosted-sites/analysisbydesign.co.uk
 5000,protect,,abd-wordpress/wordpress-vpc/hosted-sites/baltihot.co.uk
