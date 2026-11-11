@@ -62,3 +62,13 @@ public_sub_domain = "wp"
 vpc_endpoint_s3_enable = true
 
 s3_name = "abd-wordpress"
+
+# --------------------------------------------------------------------------------------------
+# NAT gateway (WP-01): replaced by the self-healing NAT instance (wordpress-vpc/nat-instance),
+# which owns the private 0.0.0.0/0 routes. The gateway's routes were removed from this state
+# (state rm) before this was switched off, so turning it off destroys only the gateway and EIP.
+# To roll back, see docs/runbooks/nat-instance.md in abd-cloud: setting this to true alone
+# fails, because the 0.0.0.0/0 routes already exist.
+# --------------------------------------------------------------------------------------------
+
+enable_nat_gateway = false
