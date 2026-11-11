@@ -22,18 +22,13 @@
       }
     },
     {
-      "Sid": "FlipPrivateDefaultRoutes",
+      "Sid": "FlipManagedDefaultRoutes",
       "Effect": "Allow",
       "Action": [
         "ec2:ReplaceRoute",
         "ec2:CreateRoute"
       ],
-      "Resource": "arn:aws:ec2:${region}:${account_id}:route-table/*",
-      "Condition": {
-        "StringLike": {
-          "ec2:ResourceTag/Name": "${route_table_name_prefix}*"
-        }
-      }
+      "Resource": ${route_table_arns}
     },
     {
       "Sid": "CompleteOwnLifecycleAction",

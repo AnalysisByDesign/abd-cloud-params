@@ -12,8 +12,9 @@ common_tag_component = "nat"
 
 # --------------------------------------------------------------------------------------------
 # NAT instance (WP-01): replaces the NAT gateway with a self-healing fck-nat instance.
-# On boot it disables source/dest checking, starts fck-nat, then repoints the private
-# route tables' 0.0.0.0/0 at itself (route flip) before completing its lifecycle hook.
+# On boot (in Pending:Wait) it disables source/dest checking, starts fck-nat, then repoints
+# the managed route tables' 0.0.0.0/0 at itself (route flip) before completing its
+# lifecycle hook. A failed flip is rolled back to the previous targets.
 # --------------------------------------------------------------------------------------------
 
 name = "nat"
@@ -48,13 +49,24 @@ enable_load_balancer  = false
 asg_subnet_tier       = "public"
 asg_require_public_ip = true
 
+# --------------------------------------------------------------------------------------------
+# Egress routing: the private route tables of these AZs are flipped to this instance.
+# One ASG serves every AZ today, and can launch in any AZ for resilience.
+# To scale out, copy this target per AZ (e.g. nat-a with name = "nat-a"), give each a
+# single AZ here and the same AZ in asg_availability_zones, and never list an AZ in two
+# targets, or their instances will take the routes from each other on every launch.
+# --------------------------------------------------------------------------------------------
+
+managed_route_table_azs = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+# asg_availability_zones = ["eu-west-1a"]
+
 # Accept all traffic from the VPC for forwarding
 asg_ingress_cidr_blocks = ["10.240.0.0/21"]
 
 # --------------------------------------------------------------------------------------------
 # Lifecycle hooks
 #  - nat-route-flip: the instance completes this itself (CONTINUE) only after the route flip.
-#    Any failure before the flip abandons the instance and leaves the routes untouched.
+#    Any failure abandons the instance, restoring the previous route targets first.
 #  - nat-drain: nothing completes this, so a terminating instance stays up for 2 minutes
 #    to let in-flight connections drain, then terminates.
 # --------------------------------------------------------------------------------------------
@@ -75,12 +87,11 @@ asg_initial_lifecycle_hooks = [
 ]
 
 # Values for the user data and IAM policy templates
+# (asg_name, route_table_ids and route_table_arns are supplied by the template)
 extra_template_vars = {
-  account_id              = "800653036500"
-  region                  = "eu-west-1"
-  asg_name                = "abd-wordpress-nat"
-  lifecycle_hook_name     = "nat-route-flip"
-  route_table_name_prefix = "abd-wordpress-private-"
+  account_id          = "800653036500"
+  region              = "eu-west-1"
+  lifecycle_hook_name = "nat-route-flip"
 }
 
 # --------------------------------------------------------------------------------------------

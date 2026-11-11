@@ -4,42 +4,75 @@
 # Terraform values are written as $${...}; shell variables are written as $var
 # (no braces) so that templatefile leaves them alone.
 #
-# 1. Disable source/destination checking on this instance (needed to forward)
-# 2. (Re)start fck-nat on the primary interface and confirm forwarding is on
-# 3. Confirm this instance has its own internet egress
-# 4. Repoint each private route table's 0.0.0.0/0 at this instance (route flip)
-# 5. Complete the launch lifecycle hook, which marks the instance healthy
+# The instance stays in Pending:Wait (launch lifecycle hook) throughout:
+#  1. Disable source/destination checking on this instance (needed to forward)
+#  2. (Re)start fck-nat on the primary interface and confirm forwarding is on
+#  3. Confirm this instance has its own internet egress
+#  4. Record the current 0.0.0.0/0 target of each managed route table
+#  5. Repoint each managed route table's 0.0.0.0/0 at this instance (route flip)
+#  6. Complete the launch lifecycle hook (CONTINUE): the instance goes InService,
+#     and during a refresh the ASG then terminates the instance it replaces
 #
-# Any failure before step 4 abandons the instance, leaving the routes untouched.
+# The managed route tables are resolved by Terraform from managed_route_table_azs,
+# so each NAT ASG only ever touches the AZs it was given.
+#
+# Any failure abandons the instance. If the flip had started, the recorded targets
+# are restored first, so the routes go back to whatever was serving them before.
 # --------------------------------------------------------------------------------
 set -euo pipefail
 exec > >(tee -a /var/log/nat-route-flip.log) 2>&1
 
 HOOK_NAME="${lifecycle_hook_name}"
 ASG_NAME="${asg_name}"
-RT_NAME_PREFIX="${route_table_name_prefix}"
+ROUTE_TABLE_IDS="${route_table_ids}"
+PREVIOUS=/run/nat-route-flip.previous
+FLIP_STARTED=0
+INSTANCE_ID=""
+
+log() { echo "$(date -Is) $*"; }
 
 imds() {
   token=$(curl -sf -X PUT http://169.254.169.254/latest/api/token -H "X-aws-ec2-metadata-token-ttl-seconds: 300")
   curl -sf -H "X-aws-ec2-metadata-token: $token" "http://169.254.169.254/latest/meta-data/$1"
 }
 
+complete_hook() {
+  for attempt in 1 2 3 4 5; do
+    aws autoscaling complete-lifecycle-action \
+      --lifecycle-hook-name "$HOOK_NAME" \
+      --auto-scaling-group-name "$ASG_NAME" \
+      --instance-id "$INSTANCE_ID" \
+      --lifecycle-action-result "$1" && return 0
+    log "complete-lifecycle-action $1 failed (attempt $attempt)"
+    sleep 5
+  done
+  return 1
+}
+
+restore_routes() {
+  [ "$FLIP_STARTED" = "1" ] && [ -s "$PREVIOUS" ] || return 0
+  while read -r rt kind target; do
+    log "restoring 0.0.0.0/0 in $rt to $target"
+    aws ec2 replace-route --route-table-id "$rt" --destination-cidr-block 0.0.0.0/0 "--$kind" "$target" ||
+      log "could not restore $rt (the previous target may no longer exist)"
+  done < "$PREVIOUS"
+}
+
+fail() {
+  trap - ERR
+  log "NAT setup failed: restoring routes and abandoning this instance"
+  restore_routes
+  complete_hook ABANDON || log "could not abandon; the hook will time out and abandon"
+  exit 1
+}
+trap fail ERR
+
 INSTANCE_ID=$(imds instance-id)
 REGION=$(imds placement/region)
-MAC=$(imds mac)
-VPC_ID=$(imds "network/interfaces/macs/$MAC/vpc-id")
 export AWS_DEFAULT_REGION=$REGION
 
-complete_hook() {
-  aws autoscaling complete-lifecycle-action \
-    --lifecycle-hook-name "$HOOK_NAME" \
-    --auto-scaling-group-name "$ASG_NAME" \
-    --instance-id "$INSTANCE_ID" \
-    --lifecycle-action-result "$1" || true
-}
-trap 'echo "$(date -Is) route flip failed, abandoning instance"; complete_hook ABANDON' ERR
-
-echo "$(date -Is) starting NAT setup on $INSTANCE_ID in $VPC_ID"
+log "starting NAT setup on $INSTANCE_ID for route tables: $ROUTE_TABLE_IDS"
+[ -n "$ROUTE_TABLE_IDS" ]
 
 # The instance has its own public IP, so it can install the CLI if the AMI lacks it
 command -v aws >/dev/null || dnf install -y awscli
@@ -57,21 +90,32 @@ done
 [ "$(sysctl -n net.ipv4.ip_forward)" = "1" ]
 
 # 3. Own egress works
-echo "$(date -Is) public IP $(curl -sf --max-time 10 https://checkip.amazonaws.com)"
+log "public IP $(curl -sf --max-time 10 https://checkip.amazonaws.com)"
 
-# 4. Route flip
-ROUTE_TABLES=$(aws ec2 describe-route-tables \
-  --filters "Name=vpc-id,Values=$VPC_ID" "Name=tag:Name,Values=$RT_NAME_PREFIX*" \
-  --query 'RouteTables[].RouteTableId' --output text)
-[ -n "$ROUTE_TABLES" ]
+# 4. Record the current targets so a failed flip can be undone
+: > "$PREVIOUS"
+for rt in $ROUTE_TABLE_IDS; do
+  current=$(aws ec2 describe-route-tables --route-table-ids "$rt" \
+    --query "RouteTables[0].Routes[?DestinationCidrBlock=='0.0.0.0/0'] | [0].[NatGatewayId,NetworkInterfaceId]" \
+    --output text)
+  read -r nat eni <<<"$current"
+  if [ -n "$nat" ] && [ "$nat" != "None" ]; then
+    echo "$rt nat-gateway-id $nat" >>"$PREVIOUS"
+  elif [ -n "$eni" ] && [ "$eni" != "None" ]; then
+    echo "$rt network-interface-id $eni" >>"$PREVIOUS"
+  fi
+  log "$rt currently routes 0.0.0.0/0 to: $current"
+done
 
-for rt in $ROUTE_TABLES; do
-  echo "$(date -Is) pointing 0.0.0.0/0 in $rt at $INSTANCE_ID"
+# 5. Route flip
+FLIP_STARTED=1
+for rt in $ROUTE_TABLE_IDS; do
+  log "pointing 0.0.0.0/0 in $rt at $INSTANCE_ID"
   aws ec2 replace-route --route-table-id "$rt" --destination-cidr-block 0.0.0.0/0 --instance-id "$INSTANCE_ID" ||
     aws ec2 create-route --route-table-id "$rt" --destination-cidr-block 0.0.0.0/0 --instance-id "$INSTANCE_ID"
 done
 
-# 5. Healthy
+# 6. InService
+complete_hook CONTINUE || fail
 trap - ERR
-complete_hook CONTINUE
-echo "$(date -Is) NAT setup complete"
+log "NAT setup complete"
