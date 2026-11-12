@@ -43,3 +43,21 @@ ecr_push_roles = {
     github_subject_prefix = "repo:AnalysisByDesign@4380764/abd-cloud-containers@1452488510"
   }
 }
+
+# --------------------------------------------------------------------------------------------
+# ECS deploy roles (WP-04 ruling 7): CI registers task definition revisions and updates
+# its own services
+# --------------------------------------------------------------------------------------------
+
+ecs_deploy_roles = {
+  abd-cloud-containers = {
+    github_repo      = "AnalysisByDesign/abd-cloud-containers"
+    role_name        = "github-ecs-deploy-abd-cloud-containers"
+    cluster_name     = "abd-wordpress-cluster"
+    services         = ["hello"]
+    role_name_prefix = "abd-wordpress"
+
+    # This repository uses GitHub's immutable OIDC subject (owner and repository IDs)
+    github_subject_prefix = "repo:AnalysisByDesign@4380764/abd-cloud-containers@1452488510"
+  }
+}
