@@ -25,6 +25,10 @@ repositories = {
   "abd/wordpress"     = {}
   "abd/github-runner" = {}
 
+  # WordPress site images (WP-05), one per site, pushed by abd-cloud-containers' sites.yml.
+  # Two weeks of dated images for rollback (a same-day rebuild replaces that day's tag).
+  "abd/wp-blacklit-uk" = { keep_dated_images = 14 }
+
   # Throwaway pushes from CI tests (WP-02 Done when); everything expires after a day
   "abd/ci-test" = { expire_all_after_days = 1 }
 }
