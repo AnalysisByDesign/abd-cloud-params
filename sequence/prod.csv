@@ -25,6 +25,7 @@
 4100,protect,,abd-wordpress/wordpress-vpc/app.ecs
 4200,protect,,abd-wordpress/wordpress-vpc/ecs.hosts
 4300,protect,,abd-wordpress/wordpress-vpc/svc.hello
+4300,protect,,abd-wordpress/wordpress-vpc/svc.smtp
 5000,protect,,abd-wordpress/wordpress-vpc/hosted-sites/amyegillin.uk
 5000,protect,,abd-wordpress/wordpress-vpc/hosted-sites/analysisbydesign.co.uk
 5000,protect,,abd-wordpress/wordpress-vpc/hosted-sites/baltihot.co.uk

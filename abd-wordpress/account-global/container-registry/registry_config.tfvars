@@ -25,6 +25,9 @@ repositories = {
   "abd/wordpress"     = {}
   "abd/github-runner" = {}
 
+  # SMTP relay for anything without its own SMTP settings (WP-04 rulings 14 and 15)
+  "abd/postfix" = {}
+
   # WordPress site images (WP-05), one per site, pushed by abd-cloud-containers' sites.yml.
   # Two weeks of dated images for rollback (a same-day rebuild replaces that day's tag).
   "abd/wp-analysisbydesign-co-uk" = { keep_dated_images = 14 }
