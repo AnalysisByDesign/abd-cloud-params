@@ -59,7 +59,7 @@ ecs_deploy_roles = {
     github_repo      = "AnalysisByDesign/abd-cloud-containers"
     role_name        = "github-ecs-deploy-abd-cloud-containers"
     cluster_name     = "abd-wordpress-cluster"
-    services         = ["hello"]
+    services         = ["hello", "blacklit-uk"]
     role_name_prefix = "abd-wordpress"
 
     # This repository uses GitHub's immutable OIDC subject (owner and repository IDs)
