@@ -41,5 +41,10 @@ ecr_push_roles = {
 
     # This repository uses GitHub's immutable OIDC subject (owner and repository IDs)
     github_subject_prefix = "repo:AnalysisByDesign@4380764/abd-cloud-containers@1452488510"
+
+    # Premium WordPress plugins and themes for the site images (WP-05 ruling 23), and
+    # the abd-wordpress-html bucket's KMS key (storage/s3.wordpress)
+    s3_read_prefixes     = ["abd-wordpress-html/premium/"]
+    kms_decrypt_key_arns = ["arn:aws:kms:eu-west-1:800653036500:key/bb72ad25-373e-4793-bd39-792d01a448ad"]
   }
 }

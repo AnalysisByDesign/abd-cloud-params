@@ -25,6 +25,9 @@ repositories = {
   "abd/wordpress"     = {}
   "abd/github-runner" = {}
 
+  # WordPress site images (WP-05), one per site, pushed by abd-cloud-containers' sites.yml
+  "abd/wp-blacklit-uk" = {}
+
   # Throwaway pushes from CI tests (WP-02 Done when); everything expires after a day
   "abd/ci-test" = { expire_all_after_days = 1 }
 }
