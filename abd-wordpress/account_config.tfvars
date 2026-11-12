@@ -73,3 +73,6 @@ github_org = ""
 # --------------------------------------------------------------------------------------------
 
 alerts_topic_name = "abd-alerts"
+
+# Let EventBridge rules (ECS alerts, WP-04) publish to the topic
+alerts_allow_eventbridge = true
