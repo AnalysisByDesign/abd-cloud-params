@@ -12,13 +12,14 @@ common_tag_component = "ecs"
 name             = "ecs-hosts"
 ecs_cluster_name = "abd-wordpress-cluster"
 
-# t4g.small for WP-04 (ruling 4); revisit in WP-05 (two small or one medium)
+# t4g.small (ruling 4)
 asg_ec2_instance_type = "t4g.small"
 
-# ECS managed scaling owns the desired capacity; max leaves room for a refresh and one
-# scale-out host
-asg_min_size = 1
-asg_max_size = 2
+# Two hosts at all times, which the two regional t4g RIs already pay for (ruling 21).
+# ECS managed scaling owns the desired capacity above that; max leaves room for an
+# instance refresh or a short scale-out to a third host
+asg_min_size = 2
+asg_max_size = 3
 
 # ECS-optimised AL2023 arm64, resolved at each launch, so every refresh takes the latest
 # (ruling 3)
