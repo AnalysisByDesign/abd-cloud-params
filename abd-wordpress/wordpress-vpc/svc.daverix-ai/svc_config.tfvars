@@ -32,10 +32,11 @@ containers = [
       WORDPRESS_DB_HOST = "mysql-rw.int.wp.abd-wp.uk:3306"
       WP_TABLE_PREFIX   = "wp_"
 
-      # Preview hostname until cutover (WP-05 ruling 27): then https://daverix.ai, and
-      # WP_COOKIE_DOMAIN as the old wp-config.php had it
-      WP_HOME    = "https://daverix-ai.abd-wp.uk"
-      WP_SITEURL = "https://daverix-ai.abd-wp.uk"
+      # The real domain since cutover (WP-05 ruling 27); the preview hostname was
+      # https://daverix-ai.abd-wp.uk. WP_COOKIE_DOMAIN is left unset, so cookies are
+      # for daverix.ai exactly.
+      WP_HOME    = "https://daverix.ai"
+      WP_SITEURL = "https://daverix.ai"
 
       WP_MEMORY_LIMIT = "100M"
       WP_CACHE        = "true"
@@ -108,12 +109,14 @@ scheduled_tasks = {
 }
 
 # --------------------------------------------------------------------------------------------
-# Routing: the preview hostname on the existing ALB (WP-05 ruling 27). At cutover add
-# "daverix.ai" and "www.daverix.ai": their DNS and certificate stay with
-# hosted-sites/daverix.ai, and removing them hands the site back to the old host.
+# Routing on the existing ALB (WP-05 ruling 27): daverix.ai and www.daverix.ai since
+# cutover, plus the preview hostname. Their DNS and certificate stay with
+# hosted-sites/daverix.ai; removing them (and setting WP_HOME and WP_SITEURL back to the
+# preview) hands the site back to the old host. WordPress redirects www and the preview
+# hostname to https://daverix.ai.
 # --------------------------------------------------------------------------------------------
 
-hostnames              = ["daverix-ai.abd-wp.uk"]
+hostnames              = ["daverix.ai", "www.daverix.ai", "daverix-ai.abd-wp.uk"]
 listener_rule_priority = 105
 dns_zone_name          = "abd-wp.uk"
 health_check_path      = "/healthz"
