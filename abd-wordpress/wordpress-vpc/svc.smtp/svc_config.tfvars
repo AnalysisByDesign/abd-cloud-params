@@ -34,6 +34,9 @@ containers = [
       MYHOSTNAME = "smtp.abd-wordpress.internal"
       # The private app subnets, where the ECS hosts and awsvpc tasks run
       MYNETWORKS = "10.240.3.0/24 10.240.4.0/24 10.240.5.0/24"
+      # Every From: header becomes "abd-cloud" <MAIL_FROM>; the envelope sender is the
+      # IONOS login from SASL_PASSWD (WP-04 ruling 21). Required by the image.
+      MAIL_FROM = "abd-cloud@analysisbydesign.co.uk"
     }
 
     secrets = {
