@@ -43,8 +43,10 @@ containers = [
       SASL_PASSWD = "/abd-wordpress/shared/postfix/sasl_passwd"
     }
 
+    # The same check as "postfix status" (the master's PID file names a live process), but
+    # silent: postfix status logs a line to the mail log on every run
     health_check = {
-      command      = ["CMD-SHELL", "postfix status"]
+      command      = ["CMD-SHELL", "kill -0 $(cat /var/spool/postfix/pid/master.pid)"]
       start_period = 15
     }
   },
