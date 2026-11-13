@@ -24,19 +24,18 @@ containers = [
     memory_reservation = 256
     memory             = 768
 
-    # Non-secret settings (WP-05 ruling 26), following blacklit.uk and daverix.uk's
-    # wp-config.php. Not yet read from this site's: check before the first apply with
-    # wp-config-to-ssm.py --check, which compares them with the live wp-config.php
+    # Non-secret settings, from the site's wp-config.php (WP-05 ruling 26)
     environment = {
       WORDPRESS_DB_NAME = "baltihot_co_uk"
       WORDPRESS_DB_USER = "baltihot_co_uk"
       WORDPRESS_DB_HOST = "mysql-rw.int.wp.abd-wp.uk:3306"
       WP_TABLE_PREFIX   = "wp_"
 
-      # Preview hostname until cutover (WP-05 ruling 27): then https://baltihot.co.uk, and
-      # WP_COOKIE_DOMAIN as the old wp-config.php had it
-      WP_HOME    = "https://baltihot-co-uk.abd-wp.uk"
-      WP_SITEURL = "https://baltihot-co-uk.abd-wp.uk"
+      # The real domain since cutover (WP-05 ruling 27); the preview hostname was
+      # https://baltihot-co-uk.abd-wp.uk. WP_COOKIE_DOMAIN is left unset, so cookies are
+      # for baltihot.co.uk exactly.
+      WP_HOME    = "https://baltihot.co.uk"
+      WP_SITEURL = "https://baltihot.co.uk"
 
       WP_MEMORY_LIMIT = "100M"
       WP_CACHE        = "true"
@@ -52,7 +51,7 @@ containers = [
       WPMS_SSL            = "tls"
       WPMS_SMTP_AUTH      = "true"
       WPMS_MAIL_FROM      = "no-reply@baltihot.co.uk"
-      WPMS_MAIL_FROM_NAME = "Baltihot"
+      WPMS_MAIL_FROM_NAME = "Balti Hot"
     }
 
     # Secrets, one SecureString each, named after the variable (WP-05 ruling 26)
@@ -107,12 +106,14 @@ scheduled_tasks = {
 }
 
 # --------------------------------------------------------------------------------------------
-# Routing: the preview hostname on the existing ALB (WP-05 ruling 27). At cutover add
-# "baltihot.co.uk" and "www.baltihot.co.uk": their DNS and certificate stay with
-# hosted-sites/baltihot.co.uk, and removing them hands the site back to the old host.
+# Routing on the existing ALB (WP-05 ruling 27): baltihot.co.uk and www.baltihot.co.uk since
+# cutover, plus the preview hostname. Their DNS and certificate stay with
+# hosted-sites/baltihot.co.uk; removing them (and setting WP_HOME and WP_SITEURL back to the
+# preview) hands the site back to the old host. WordPress redirects www and the preview
+# hostname to https://baltihot.co.uk.
 # --------------------------------------------------------------------------------------------
 
-hostnames              = ["baltihot-co-uk.abd-wp.uk"]
+hostnames              = ["baltihot.co.uk", "www.baltihot.co.uk", "baltihot-co-uk.abd-wp.uk"]
 listener_rule_priority = 104
 dns_zone_name          = "abd-wp.uk"
 health_check_path      = "/healthz"
