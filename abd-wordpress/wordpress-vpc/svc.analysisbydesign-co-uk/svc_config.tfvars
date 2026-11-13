@@ -117,4 +117,7 @@ listener_rule_priority = 101
 dns_zone_name          = "abd-wp.uk"
 health_check_path      = "/healthz"
 
+# abd-wordpress-analysisbydesign-co-uk is 36 characters, over the 32 a target group name allows
+target_group_name = "abd-wp-analysisbydesign-co-uk"
+
 enable_alarms = true
