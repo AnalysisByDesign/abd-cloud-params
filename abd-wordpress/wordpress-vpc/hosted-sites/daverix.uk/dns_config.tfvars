@@ -35,6 +35,12 @@ wp_sub_domain  = "daverixuk"
 # The main Wordpress load balancer
 trg_lb_name = "ec2-asg"
 
+# daverix.uk only redirects: a 301 from the load balancer to daverix.ai, path kept, for
+# daverix.uk, www.daverix.uk and daverixuk.abd-wp.uk (WP-05 ruling 10). The old host no
+# longer sees its requests.
+redirect_to       = "daverix.ai"
+redirect_priority = 106
+
 # Email records
 mx_records = [
   "10 mx00.1and1.co.uk",
