@@ -24,19 +24,18 @@ containers = [
     memory_reservation = 256
     memory             = 768
 
-    # Non-secret settings (WP-05 ruling 26), following blacklit.uk and daverix.uk's
-    # wp-config.php. Not yet read from this site's: check before the first apply with
-    # wp-config-to-ssm.py --check, which compares them with the live wp-config.php
+    # Non-secret settings, from the site's wp-config.php (WP-05 ruling 26)
     environment = {
       WORDPRESS_DB_NAME = "amyegillin_uk"
       WORDPRESS_DB_USER = "amyegillin_uk"
       WORDPRESS_DB_HOST = "mysql-rw.int.wp.abd-wp.uk:3306"
       WP_TABLE_PREFIX   = "wp_"
 
-      # Preview hostname until cutover (WP-05 ruling 27): then https://amyegillin.uk, and
-      # WP_COOKIE_DOMAIN as the old wp-config.php had it
-      WP_HOME    = "https://amyegillin-uk.abd-wp.uk"
-      WP_SITEURL = "https://amyegillin-uk.abd-wp.uk"
+      # The real domain since cutover (WP-05 ruling 27); the preview hostname was
+      # https://amyegillin-uk.abd-wp.uk. WP_COOKIE_DOMAIN is left unset, so cookies are
+      # for amyegillin.uk exactly.
+      WP_HOME    = "https://amyegillin.uk"
+      WP_SITEURL = "https://amyegillin.uk"
 
       WP_MEMORY_LIMIT = "100M"
       WP_CACHE        = "true"
@@ -52,7 +51,7 @@ containers = [
       WPMS_SSL            = "tls"
       WPMS_SMTP_AUTH      = "true"
       WPMS_MAIL_FROM      = "no-reply@amyegillin.uk"
-      WPMS_MAIL_FROM_NAME = "Amy E Gillin"
+      WPMS_MAIL_FROM_NAME = "Amy Gillin"
     }
 
     # Secrets, one SecureString each, named after the variable (WP-05 ruling 26)
@@ -107,12 +106,14 @@ scheduled_tasks = {
 }
 
 # --------------------------------------------------------------------------------------------
-# Routing: the preview hostname on the existing ALB (WP-05 ruling 27). At cutover add
-# "amyegillin.uk" and "www.amyegillin.uk": their DNS and certificate stay with
-# hosted-sites/amyegillin.uk, and removing them hands the site back to the old host.
+# Routing on the existing ALB (WP-05 ruling 27): amyegillin.uk and www.amyegillin.uk since
+# cutover, plus the preview hostname. Their DNS and certificate stay with
+# hosted-sites/amyegillin.uk; removing them (and setting WP_HOME and WP_SITEURL back to the
+# preview) hands the site back to the old host. WordPress redirects www and the preview
+# hostname to https://amyegillin.uk.
 # --------------------------------------------------------------------------------------------
 
-hostnames              = ["amyegillin-uk.abd-wp.uk"]
+hostnames              = ["amyegillin.uk", "www.amyegillin.uk", "amyegillin-uk.abd-wp.uk"]
 listener_rule_priority = 102
 dns_zone_name          = "abd-wp.uk"
 health_check_path      = "/healthz"
